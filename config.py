@@ -26,7 +26,7 @@ def _get_secret(key: str, default: str = "") -> str:
 OPENAI_API_KEY = _get_secret("OPENAI_API_KEY")
 EMBEDDING_MODEL = "text-embedding-3-small"
 EMBEDDING_DIM = 1536
-LLM_MODEL = "gpt-4o"
+LLM_MODEL = "gpt-4o-mini"
 LLM_MODEL_MINI = "gpt-4o-mini"
 
 MAIN_INDEX_PATH = DATA_DIR / "main_index.faiss"
