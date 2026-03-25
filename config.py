@@ -26,11 +26,8 @@ def _get_secret(key: str, default: str = "") -> str:
 OPENAI_API_KEY = _get_secret("OPENAI_API_KEY")
 EMBEDDING_MODEL = "text-embedding-3-small"
 EMBEDDING_DIM = 1536
-
-DEEPSEEK_API_KEY = _get_secret("DEEPSEEK_API_KEY")
-DEEPSEEK_BASE_URL = "https://api.deepseek.com"
-LLM_MODEL = "deepseek-chat"
-LLM_MODEL_MINI = "deepseek-chat"
+LLM_MODEL = "gpt-4o"
+LLM_MODEL_MINI = "gpt-4o-mini"
 
 MAIN_INDEX_PATH = DATA_DIR / "main_index.faiss"
 EQUATION_INDEX_PATH = DATA_DIR / "equation_index.faiss"

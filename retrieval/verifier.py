@@ -40,7 +40,7 @@ def verify_dataset_usage(
     with a penalty on their score.
     """
     if client is None:
-        client = OpenAI(api_key=config.DEEPSEEK_API_KEY, base_url=config.DEEPSEEK_BASE_URL)
+        client = OpenAI(api_key=config.OPENAI_API_KEY)
 
     dataset_str = ", ".join(dataset_terms[:3])
     verified: list[PaperResult] = []

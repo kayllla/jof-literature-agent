@@ -67,7 +67,7 @@ User query: {query}"""
 def parse_query(query: str, client: OpenAI | None = None) -> ParsedQuery:
     """Classify a query and expand dataset aliases."""
     if client is None:
-        client = OpenAI(api_key=config.DEEPSEEK_API_KEY, base_url=config.DEEPSEEK_BASE_URL)
+        client = OpenAI(api_key=config.OPENAI_API_KEY)
 
     try:
         resp = client.chat.completions.create(

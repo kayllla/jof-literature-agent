@@ -87,7 +87,7 @@ if st.button("Search", type="primary", disabled=not query):
         st.error("Index files not found. Please run `python scripts/build_index.py` first.")
         st.stop()
 
-    client = OpenAI(api_key=config.DEEPSEEK_API_KEY, base_url=config.DEEPSEEK_BASE_URL)
+    client = OpenAI(api_key=config.OPENAI_API_KEY)
 
     with st.spinner("Classifying query …"):
         parsed = parse_query(query, client=client)

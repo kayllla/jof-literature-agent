@@ -16,6 +16,7 @@ class PaperMetadata:
     abstract: str | None = None
     doi: str | None = None
     source_path: str | None = None
+    is_article: bool = True
 
 
 _DOI_PATTERN = re.compile(r"(10\.1111/jofi\.\d+)", re.IGNORECASE)
@@ -73,7 +74,18 @@ def extract_metadata(paper_id: str, blocks: list[dict], source_path: str = "") -
     if meta.doi is None:
         meta.doi = _doi_from_paper_id(paper_id)
 
+    meta.is_article = _check_is_article(meta, blocks)
     return meta
+
+
+def _check_is_article(meta: PaperMetadata, blocks: list[dict]) -> bool:
+    """A real article must have an ABSTRACT; editorials, corrigenda, etc. do not."""
+    if meta.abstract:
+        return True
+    for b in blocks:
+        if b.get("type") == "text" and b.get("text", "").strip().upper().startswith("ABSTRACT"):
+            return True
+    return False
 
 
 def _doi_from_paper_id(paper_id: str) -> str | None:

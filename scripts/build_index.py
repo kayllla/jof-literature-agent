@@ -39,9 +39,14 @@ def main() -> None:
     all_main: list[Chunk] = []
     all_eq: list[Chunk] = []
     all_meta: list[dict] = []
+    skipped = 0
 
     for paper in tqdm(papers, desc="Processing papers"):
         meta = extract_metadata(paper.paper_id, paper.blocks, str(paper.source_path))
+        if not meta.is_article:
+            logging.info("Skipping non-article: %s (%s)", meta.paper_id, meta.title or "untitled")
+            skipped += 1
+            continue
         all_meta.append({
             "paper_id": meta.paper_id,
             "title": meta.title,
@@ -55,8 +60,8 @@ def main() -> None:
         all_eq.extend(eq_chunks)
 
     logging.info(
-        "Total: %d main chunks, %d equation chunks from %d papers",
-        len(all_main), len(all_eq), len(papers),
+        "Total: %d main chunks, %d equation chunks from %d articles (%d non-articles skipped)",
+        len(all_main), len(all_eq), len(all_meta), skipped,
     )
 
     save_paper_metadata(all_meta)

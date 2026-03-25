@@ -37,7 +37,7 @@ def generate_answer(
 ) -> str:
     """Build a context from retrieved results and generate an LLM answer."""
     if client is None:
-        client = OpenAI(api_key=config.DEEPSEEK_API_KEY, base_url=config.DEEPSEEK_BASE_URL)
+        client = OpenAI(api_key=config.OPENAI_API_KEY)
 
     if not paper_results:
         return "No relevant papers found in the JOF corpus for this query."
@@ -60,7 +60,7 @@ def generate_answer_stream(
 ):
     """Streaming variant — yields text chunks as they arrive."""
     if client is None:
-        client = OpenAI(api_key=config.DEEPSEEK_API_KEY, base_url=config.DEEPSEEK_BASE_URL)
+        client = OpenAI(api_key=config.OPENAI_API_KEY)
 
     if not paper_results:
         yield "No relevant papers found in the JOF corpus for this query."
